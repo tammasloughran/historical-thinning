@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/coecms/esm-pre-industrial.svg?branch=master)](https://travis-ci.org/coecms/esm-pre-industrial)
-
 # ACCESS-ESM with **payu**
 
 ## Quickstart Guide
@@ -14,8 +12,9 @@ Create a directory in which to keep the model configurations:
 
     mkdir -p ~/access-esm
     cd ~/access-esm
-    git clone https://github.com/coecms/esm-pre-industrial
-    cd esm-pre-industrial
+    git clone https://github.com/coecms/access-esm
+    cd access-esm
+    git co pre-industrial
 
 We strongly recommend to switch to a new branch for the running of the model:
 
