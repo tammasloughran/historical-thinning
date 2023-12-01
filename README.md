@@ -14,7 +14,17 @@ Create a directory in which to keep the model configurations:
     cd ~/access-esm
     git clone https://github.com/coecms/access-esm
     cd access-esm
+
+Then check out the branch of the experiment you want to run (or base your run on), for example for pre-industrial, chose:
+
     git checkout pre-industrial
+
+Other branches include:
+ - `historical`
+ - `ssp585`
+ - `last-interglacial`
+ - `last-millenium`
+ - `82ka`
 
 We strongly recommend to switch to a new branch for the running of the model:
 
