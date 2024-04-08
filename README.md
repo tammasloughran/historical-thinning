@@ -2,10 +2,9 @@
 
 ## Quickstart Guide
 
-
 Get payu:
 
-    module use /g/data/hh5/public/modules
+    module use /g/data3/hh5/public/modules
     module load conda/analysis3-unstable
 
 Create a directory in which to keep the model configurations:
@@ -14,21 +13,11 @@ Create a directory in which to keep the model configurations:
     cd ~/access-esm
     git clone https://github.com/coecms/access-esm
     cd access-esm
+    git checkout historical
 
-Then check out the branch of the experiment you want to run (or base your run on), for example for pre-industrial, chose:
+Set up a warm start from a CSIRO run (see the script for details):
 
-    git checkout pre-industrial
-
-Other branches include:
- - `historical`
- - `ssp585`
- - `last-interglacial`
- - `last-millenium`
- - `82ka`
-
-We strongly recommend to switch to a new branch for the running of the model:
-
-    git checkout -b runs
+    ./warm-start.sh
 
 Run the model:
 
@@ -42,9 +31,30 @@ The default configuration is a 1 year per model run. To run the model for, say, 
 
     payu run -n 25
 
+With default settings, 1 model year cost is ~ 1100 SU, with a walltime of 1 hour 20 minutes
+
 **Note:**
 We have noticed that some modules interfere with the git commands, for example `matlab/R2018a`.
 If you are running into issues during the installation, it might be a good idea to `module purge` first before starting again.
+
+## Warm Starts
+
+The model is normally 'warm started' from the restart files of another
+configuration. For instance the SSP experiments are started from the end of the
+historical experiment, and in turn the historical experiment is started from
+the pre-industrial control experiment (different ensemble members are created
+by starting from different piControl years). Starting the experiment from
+scratch requires a long period of spinup to ensure stability and should be
+avoided if possible.
+
+There are two options for restarting the model. It can be started from an
+experiment run by CSIRO (requires membership in the p66 group), or it can be
+started from another Payu experiment.
+
+To perform a warm start, edit the file `warm-start.sh` to set the experiment
+directory to start from and then run the script. For CSIRO jobs you must also
+specify the date of the run to start from, for Payu jobs each restart directory
+holds a different year.
 
 ## Understanding **payu**
 
@@ -62,7 +72,7 @@ This will not be part of this document.
 To understand **payu**, it helps to distinguish certain terms:
 
 -   The **laboratory** is a directory where all parts of the model are kept.
-    It is typically in the user's short directory, usually at `/scratch/$PROJECT/$USER/<MODEL>`
+    It is typically in the user's short directory, usually at `/short/$PROJECT/$USER/<MODEL>`
 -   The **Control Directory** is the directory where the model configuration is
     kept and from where the model is run.
 -   The **work** directory is where the model will actually be run.
@@ -113,7 +123,7 @@ The ESM 1.5 subversion of ACCESS specifically contains these models:
 On `gadi`, first make sure that you have access to our modules.
 This can most easily been done by adding the line
 
-    module use /g/data/hh5/public/modules
+    module use /g/data3/hh5/public/modules
 
 to your `~/.profile`, then logging back in. Then all you have to do is
 
@@ -133,20 +143,10 @@ Create a directory in your home directory to keep all the Control Directories yo
 
 Then clone the most recent version of the ACCESS-ESM control directory:
 
-    git clone https://github.com/coecms/esm-pre-industrial
-    cd esm-pre-industrial
+    git clone https://github.com/coecms/esm-historical
+    cd esm-historical
 
-Every time you run the model, payu will check whether anything has changed, including the configuration
-files, the ancillary files, and executables. If anything has changed, it will create a new
-commit in the git repository to keep track of the changes.
-
-This can quickly create a lot new commits with such helpful names 'Run 1', 'Run 2', and so forth.
-
-For this reason, it is strongly recommended that you switch to a branch specifically for you running the experiment.
-
-You can do this by running
-
-    git checkout -b runs
+(Note: Currently we only have the historical model set up, other versions will follow later.)
 
 ### Setting up the Master Configuration file.
 
@@ -154,7 +154,7 @@ Open the `config.yaml` file with your preferred text editor.
 
 Let's have a closer look at the parts:
 
-    jobname: pre-industrial
+    jobname: historical
     queue: normal
     walltime: 20:00:00
 
@@ -165,7 +165,7 @@ These are settings for the PBS system. Name, walltime and queue to use.
 
 The location of the laboratory. At this point, **payu** can not expand shell environment variables (it's in our TO-DO), so as a work-around, if you use relative paths, it will be relative to your default short directory.
 
-In this default configuration, it will be in `/scratch/$PROJECT/$USER/access-esm`.
+In this default configuration, it will be in `/short/$PROJECT/$USER/access-esm`.
 But you can also hard-code the full path, if you want it somewhere different.
 
     model: access
@@ -176,32 +176,30 @@ The main model. This mainly tells **payu** which driver to use. **payu** knows t
         - name: atmosphere
           model: um
           ncpus: 192
-          exe: /g/data/access/payu/access-esm/bin/coe/um7.3x
+          exe: /short/public/access-esm/payu/bin/csiro/um_hg3.exe-20190129_15
           input:
-            - /g/data/access/payu/access-esm/input/pre-industrial/atmosphere
-            - /g/data/access/payu/access-esm/input/pre-industrial/start_dump
-   
+            - /short/public/access-esm/payu/input/historical/atmosphere
+
         - name: ocean
           model: mom
-          ncpus: 180
-          exe: /g/data/access/payu/access-esm/bin/coe/mom5xx
+          ncpus: 84
+          exe: /short/public/access-esm/payu/bin/coe/fms_ACCESS-CM.x
           input:
-            - /g/data/access/payu/access-esm/input/pre-industrial/ocean/common
-            - /g/data/access/payu/access-esm/input/pre-industrial/ocean/pre-industrial
+            - /short/public/access-esm/payu/input/common/ocean
+            - /short/public/access-esm/payu/input/historical/ocean
 
         - name: ice
           model: cice
           ncpus: 12
-          exe: /g/data/access/payu/access-esm/bin/coe/cicexx
+          exe: /short/public/access-esm/payu/bin/csiro/cice4.1_access-mct-12p-20180108
           input:
-            - /g/data/access/payu/access-esm/input/pre-industrial/ice
+            - /short/public/access-esm/payu/input/common/ice
 
         - name: coupler
           model: oasis
           ncpus: 0
           input:
-            - /g/data/access/payu/access-esm/input/pre-industrial/coupler
-
+            - /short/public/access-esm/payu/input/common/coupler
 
 This is probably the meatiest part of the configuration, so let's look at it in more detail.
 
@@ -216,7 +214,7 @@ The **name** is more than a useful reminder of what the model is.
 **payu** expects this submodel's configuration files in a subdirectory with that name.
 
     collate:
-       exe: /g/data/access/payu/access-esm/bin/mppnccombine
+       exe: /short/public/access-esm/payu/bin/mppnccombine
        restart: true
        mem: 4GB
 
@@ -227,14 +225,14 @@ the `restart: true` option means the restart files from the **previous** run are
 collated. This saves space and cuts down the number of files which makes more efficient
 use of storage and better for archiving in the future.
 
-    restart: /g/data/access/payu/access-esm/restart/pre-industrial
+    restart: /short/public/access-esm/payu/restart/historical
 
 This is the location of the warm restart files.
 **payu** will use the restart files in there for the initial run.
 
     calendar:
         start:
-            year: 101
+            year: 1850
             month: 1
             days: 1
 
@@ -317,3 +315,5 @@ To automatically submit several runs (and to take advantage of the `runspersub` 
 ## Finding the Output
 
 The output is automatically copied to the `archive/outputXXX` directories.
+
+**Warning**: This directory is a link to your laboratory (probably on scratch), so while it might *seem* that the output files are created twice, they are not. Deleting them from one location also removes them from the other. Do not do that if you want to keep the data.

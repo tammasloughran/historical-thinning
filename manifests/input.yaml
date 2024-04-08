@@ -1,11 +1,21 @@
 format: yamanifest
 version: 1.0
 ---
+work/atmosphere/INPUT/BC_hi_1849_2015_ESM1.anc:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/BC_hi_1849_2015_ESM1.anc
+  hashes:
+    binhash: 12993be791833bc6284f24d54c93baf4
+    md5: 29aa34a87e4874f0a4cd754b3c95b38b
 work/atmosphere/INPUT/BC_hi_1850_ESM1.anc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/BC_hi_1850_ESM1.anc
   hashes:
     binhash: bc9260e03478cf54f46d0ffaa01a7e97
     md5: 74803eb36a358f9ac8ecdae36cdb7f56
+work/atmosphere/INPUT/Bio_1849_2015_ESM1.anc:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/Bio_1849_2015_ESM1.anc
+  hashes:
+    binhash: 5a9350f8ea2072345f0a474c4d91640d
+    md5: 1198fb99e47ec3212389208bb1787ef1
 work/atmosphere/INPUT/Bio_1850_ESM1.anc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/Bio_1850_ESM1.anc
   hashes:
@@ -51,11 +61,21 @@ work/atmosphere/INPUT/DMS_conc.N96:
   hashes:
     binhash: 3bad0d245adf72c0b890611616484689
     md5: 7e8ec8de832c0b9b8c1d9f0eda4d54e5
+work/atmosphere/INPUT/Ndep_1849_2015.anc:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/Ndep_1849_2015.anc
+  hashes:
+    binhash: 4fcffa5e717857a1ae6657d5107f481f
+    md5: ff75533e9f52d92c42ac3556b4ec1fed
 work/atmosphere/INPUT/Ndep_1850_ESM1.anc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/Ndep_1850_ESM1.anc
   hashes:
     binhash: 37f9588daf45d2c0e0c5e73ab73a9ad5
     md5: 48462cfa1aeed200c3b8d0bf1b49654a
+work/atmosphere/INPUT/OCFF_1849_2015_ESM1.anc:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/OCFF_1849_2015_ESM1.anc
+  hashes:
+    binhash: dfdee088c5aad3655964bacc68c75c79
+    md5: 42ccb16cd37ab12b49b2c115f8b3c29a
 work/atmosphere/INPUT/OCFF_1850_ESM1.anc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/OCFF_1850_ESM1.anc
   hashes:
@@ -96,26 +116,36 @@ work/atmosphere/INPUT/STASHmaster/STASHsections_A:
   hashes:
     binhash: 6049f0c555b3c33d61bc3891f5a397c5
     md5: 8525fd107dbea6184db74089f1d55fd9
+work/atmosphere/INPUT/TSI_CMIP6_ESM_v2:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/TSI_CMIP6_ESM_v2
+  hashes:
+    binhash: cc14c34512c0c1141735af4d5969a9c9
+    md5: 15aa13632aa616dcf079b152a5cbd120
 work/atmosphere/INPUT/biogenic_351sm.N96L38:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/biogenic_351sm.N96L38
   hashes:
     binhash: 8ab4ff40358e274aa21d0240c8af2f71
     md5: 55eb75f602a4639fb3c8ff40e36eb661
+work/atmosphere/INPUT/cableCMIP6_LC_1850-2015.nc:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/cableCMIP6_LC_1850-2015.nc
+  hashes:
+    binhash: 306f76d4c25c43b70527c9f030bfdd13
+    md5: 425a2b30b996d40e34acd61d319a6faf
 work/atmosphere/INPUT/cable_vegfunc_N96.anc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/cable_vegfunc_N96.anc
   hashes:
     binhash: a91053ef6f75a81581f28d0979e4d526
     md5: 7a8cb16191ad29b081514657893530c6
+work/atmosphere/INPUT/ozone_1849_2015_ESM1.anc:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/ozone_1849_2015_ESM1.anc
+  hashes:
+    binhash: eecbb2a8383e88211e7ca64ee88bed6a
+    md5: 96cded5d4248c88e4088700778dc8557
 work/atmosphere/INPUT/ozone_1850_ESM1.anc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/ozone_1850_ESM1.anc
   hashes:
     binhash: 839cf76c5a5784b294824cab29be9e54
     md5: a64a01e3b092085fca308524a75a1cee
-work/atmosphere/INPUT/pre-industrial.astart:
-  fullpath: /g/data/access/payu/access-esm/input/pre-industrial/start_dump/pre-industrial.astart
-  hashes:
-    binhash: 83e6b704229053bb2de34f106adc10c1
-    md5: f31560220e51d999f9dae5820d73cca8
 work/atmosphere/INPUT/qrclim.slt:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/qrclim.slt
   hashes:
@@ -136,6 +166,11 @@ work/atmosphere/INPUT/qrparm.soil_igbp_vg:
   hashes:
     binhash: 132f243f6f1d47858f7b3f2a4d3f633b
     md5: 26ce57f462dd574fe49f290ab7877112
+work/atmosphere/INPUT/scycl_1849_2015_ESM1_v4.anc:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/scycl_1849_2015_ESM1_v4.anc
+  hashes:
+    binhash: 98072431891242562534f91e8863a341
+    md5: 0d9c68fffff5f5ade1743e1b38fef323
 work/atmosphere/INPUT/scycl_1850_ESM1_v4.anc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/atmosphere/scycl_1850_ESM1_v4.anc
   hashes:
@@ -266,6 +301,11 @@ work/atmosphere/INPUT/volcts_18502000ave.dat:
   hashes:
     binhash: 26c6ad3ebd1abb9a2ca01349a0666db3
     md5: 47bd369c750be55d706ab60c78bc7aee
+work/atmosphere/INPUT/volcts_cmip6.dat:
+  fullpath: /g/data/access/payu/access-esm/input/historical/atmosphere/volcts_cmip6.dat
+  hashes:
+    binhash: cb407b0f2ec8b82ef44d929fd0398589
+    md5: 9fa4ef9fbc7c86cebd22980e73347f67
 work/coupler/areas.nc:
   fullpath: /g/data/access/payu/access-esm/input/pre-industrial/coupler/areas.nc
   hashes:

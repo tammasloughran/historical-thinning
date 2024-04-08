@@ -1,6 +1,6 @@
-jobname: pre-industrial
+jobname: historical
 queue: normal
-walltime: 3:10:00
+walltime: 1:40:00
 
 # note: if laboratory is relative path, it is relative to /scratch/$PROJECT/$USER
 laboratory: access-esm
@@ -12,8 +12,8 @@ submodels:
       ncpus: 192
       exe: /g/data/access/payu/access-esm/bin/coe/um7.3x
       input:
+        - /g/data/access/payu/access-esm/input/historical.corrected/atmosphere
         - /g/data/access/payu/access-esm/input/pre-industrial/atmosphere
-        - /g/data/access/payu/access-esm/input/pre-industrial/start_dump
 
     - name: ocean
       model: mom
@@ -45,16 +45,23 @@ restart: /g/data/access/payu/access-esm/restart/pre-industrial
 
 calendar:
     start:
-        year: 101
+        # Check also 'MODEL_BASIS_TIME' in atmosphere namelists,
+        # 'inidate' in ice namelists
+        year: 1850
         month: 1
         days: 1
 
     runtime:
-        years: 1
+        years: 1 # NOTE: Must be 1 year for land use changes
         months: 0
         days: 0
 
+# Increase to run multiple years in a single submission
 runspersub: 1
+
+userscripts:
+    # Setup land use changes
+    setup: ./scripts/pre.sh work/atmosphere/INPUT/cableCMIP6_LC_1850-2015.nc
 
 stacksize: unlimited
 
